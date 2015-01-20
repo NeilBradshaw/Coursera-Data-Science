@@ -1,0 +1,14 @@
+complete <- function(directory, FileNo = 1:332) {
+    
+       dframe <- data.frame(FileNo = integer(), completedRows = integer())
+       for (id in FileNo) {
+         filename <- paste(directory, "/",
+                           sprintf("%03d", as.integer(id)),
+                           ".csv", sep = "")
+         lines <- read.csv(filename)
+         nd <- data.frame(id = id,
+                          CompletedRows = nrow(na.omit(lines)))
+         dframe <- rbind(dframe, nd)
+       }
+       dframe
+  }
